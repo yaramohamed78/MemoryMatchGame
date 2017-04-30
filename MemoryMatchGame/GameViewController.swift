@@ -114,10 +114,13 @@ class GameViewController: UIViewController {
                               options: .transitionFlipFromLeft,
                               animations: { sender.setBackgroundImage(self.images[sender.tag], for: .normal)},
                               completion: nil)
+            self.view.isUserInteractionEnabled = false
             DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
                 self.compareCards(self.selectedButton!,sender)
+                self.view.isUserInteractionEnabled = true
                 
             })
+
             
         }
         
@@ -182,8 +185,11 @@ class GameViewController: UIViewController {
     func startGame()
     {
         assignImages()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+        self.view.isUserInteractionEnabled = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute:
+            {
             self.hideAll()
+            self.view.isUserInteractionEnabled = true
             
         })
     }
